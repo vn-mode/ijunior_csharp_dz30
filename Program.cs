@@ -6,32 +6,34 @@ namespace vn_mode_csharp_dz30
     {
         static void Main(string[] args)
         {
-            int userNumber;
-            bool isOpen = true;
+            Console.WriteLine("Введите любое число:");
+            int number = GetNumber();
+            Console.WriteLine("Отлично! Вы ввели число " + number);
+        }
 
+        static int GetNumber()
+        {
+            bool isOpen = true;
+            int resault = 0;
 
             while (isOpen)
             {
-                Console.Write("Введите целое число: ");
-                RequestInt(Console.ReadLine(), out userNumber);
-                if (userNumber != 0)
+                string userInput = Console.ReadLine();
+                int.TryParse(userInput, out int resaultParse);
+
+                if (resaultParse != 0)
                 {
+                    resault = resaultParse;
                     isOpen = false;
+                }
+
+                else
+                {
+                    Console.WriteLine("Ошибка! Попробуйте ещё раз ввести число: ");
                 }
             }
 
-            static void RequestInt(string message, out int userNumber)
-            {
-                bool result = int.TryParse(message, out userNumber);
-                if (result)
-                {
-                    Console.WriteLine("Отлично! Вы ввели " + userNumber);
-                }
-                else
-                {
-                    Console.WriteLine("Не удалось!");
-                }
-            }
+            return resault;
         }
     }
 }
